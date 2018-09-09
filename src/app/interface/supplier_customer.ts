@@ -1,7 +1,7 @@
 import { Address } from "../class/address";
 
 export interface CustomerSupplierInterface{
-    id:string;
+    id:number;
     name:string;
     phone:string;
     email:string;

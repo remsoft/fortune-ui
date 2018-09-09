@@ -2,7 +2,7 @@ import { CustomerSupplierInterface } from "../interface/supplier_customer";
 import { Address } from "./address";
 
 export class CustomerSupplier implements CustomerSupplierInterface {
-    id: string;
+    id: number;
     name: string;
     phone: string;
     email: string;
