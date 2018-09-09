@@ -3,11 +3,13 @@ import {MaintenanceRoutingModule,routedComponents} from './maintenance-routing.m
 import { ThemeModule } from '../../@theme/theme.module';
 import {CustomerSupplier} from '../../class/supplier_customer';
 import { SupplierService } from '../../service/supplier';
+import { Ng2SmartTableModule } from 'ng2-smart-table';
+import { SmartTableService } from '../../@core/data/smart-table.service';
 
 @NgModule({
-    imports:[MaintenanceRoutingModule,ThemeModule],
+    imports:[MaintenanceRoutingModule,ThemeModule,Ng2SmartTableModule], 
     declarations:[...routedComponents],
-    providers: [SupplierService],
+    providers: [SupplierService,SmartTableService],
 })
 export class MaintenanceModule{
     suppCust: CustomerSupplier;
