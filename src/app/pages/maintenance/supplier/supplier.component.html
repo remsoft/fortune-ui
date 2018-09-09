@@ -1,0 +1,70 @@
+<div class="row">
+  <div class="col-md-6">
+    {{diagnostic}}
+    <form (ngSubmit)="onSubmit()" #suppCustForm="ngForm">
+      <nb-card>
+        <nb-card-header>Supplier</nb-card-header>
+        <nb-card-body>
+          <div class="form-group row">
+            <label for="nameId" class="col-sm-3 col-form-label">Name</label>
+            <div class="col-sm-9">
+              <input class="form-control" id="nameId" placeholder="Name" [(ngModel)]="model.name" name="name">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="phoneId" class="col-sm-3 col-form-label">Phone</label>
+            <div class="col-sm-9">
+              <input type="phone" class="form-control" id="phoneId" placeholder="Phone" [(ngModel)]="model.phone" name="phone">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="phoneId" class="col-sm-3 col-form-label">Email</label>
+            <div class="col-sm-9">
+              <input type="phone" class="form-control" id="phoneId" placeholder="Email" [(ngModel)]="model.email" name="email">
+            </div>
+          </div>
+        </nb-card-body>
+      </nb-card>
+      <nb-card>
+        <nb-card-header>Address</nb-card-header>
+        <nb-card-body>
+          <div class="form-group row">
+            <label for="nameId" class="col-sm-3 col-form-label">Street</label>
+            <div class="col-sm-9">
+              <input class="form-control" id="nameId" placeholder="Street" [(ngModel)]="model.address.street" name="street">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="nameId" class="col-sm-3 col-form-label">City</label>
+            <div class="col-sm-9">
+              <input class="form-control" id="nameId" placeholder="City" [(ngModel)]="model.address.city" name="city">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="nameId" class="col-sm-3 col-form-label">State</label>
+            <div class="col-sm-9">
+              <input class="form-control" id="nameId" placeholder="State" [(ngModel)]="model.address.state" name="state">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="nameId" class="col-sm-3 col-form-label">Postal Code</label>
+            <div class="col-sm-9">
+              <input class="form-control" id="nameId" placeholder="Postal Code" [(ngModel)]="model.address.zip" name="zip">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="nameId" class="col-sm-3 col-form-label">Country</label>
+            <div class="col-sm-9">
+              <input class="form-control" id="nameId" placeholder="Country" [(ngModel)]="model.address.country" name="country">
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="offset-sm-3 col-sm-9">
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+          </div>
+        </nb-card-body>
+      </nb-card>
+    </form>
+  </div>
+</div>
