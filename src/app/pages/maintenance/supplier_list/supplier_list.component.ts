@@ -75,6 +75,7 @@ export class SupplierListComponent implements OnInit {
     }
   }
   onAdd(event): void {
+    console.log("Enter Add");
     this.router.navigate(["pages/maintenance/supplier_form"]);    
   }
 
