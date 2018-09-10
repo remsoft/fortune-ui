@@ -30,10 +30,6 @@ export const MENU_ITEMS: NbMenuItem[] = [
     icon: 'ion-clipboard',
     children:[{
       title:'Supplier',
-      link:'/pages/maintenance/supplier_form',
-    },
-    {
-      title:'Supplier List',
       link:'/pages/maintenance/supplier_list',
     }
   ]

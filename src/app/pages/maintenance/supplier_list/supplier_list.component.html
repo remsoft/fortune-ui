@@ -1,10 +1,11 @@
 <nb-card>
   <nb-card-header>
-    Smart Table
+    List of Supplier
   </nb-card-header>
 
   <nb-card-body>
-    <ng2-smart-table [settings]="settings" [source]="source" (deleteConfirm)="onDeleteConfirm($event)">
+    <div style="float: right;margin-bottom:1em"><button type="button" (click)="onAdd()" class="btn btn-primary">Add</button></div>
+    <ng2-smart-table [settings]="settings" [source]="source" (deleteConfirm)="onDeleteConfirm($event)" (add)="onAdd($event)" >
     </ng2-smart-table>
   </nb-card-body>
 </nb-card>

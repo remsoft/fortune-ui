@@ -16,16 +16,22 @@ const httpOptions = {
 
 @Injectable()
 export class SupplierService {
-    fotuna_ws_ip = "http://localhost:8080/";
-    fortuna_ws_supplier_url = this.fotuna_ws_ip + "createcustsup";
+    fotuna_ws_url = "http://localhost:8080/";
+    create_customer_supplier_path = this.fotuna_ws_url + "createcustsup";
+    get_customer_supplier_path = this.fotuna_ws_url + "getcustsupall?";
 
     constructor(private http: HttpClient) {
+    }
+    
+     /** GET: fetch list of supplier from database */
+    getSupplierAll(isCustomer:string):Observable<CustomerSupplier[]>{
+        return this.http.get<CustomerSupplier[]>(this.get_customer_supplier_path+"isc="+isCustomer);
     }
 
 
     /** POST: add a new supplier to the database */
     addSupplier(suppCust: CustomerSupplier): Observable<CustomerSupplier> {
-        return this.http.post<CustomerSupplier>(this.fortuna_ws_supplier_url, suppCust);
+        return this.http.post<CustomerSupplier>(this.create_customer_supplier_path, suppCust);
             // .pipe(
             //     catchError(this.handleError('addHero', suppCust))
             // );
