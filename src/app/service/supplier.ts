@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams, HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { CustomerSupplier } from '../class/supplier_customer';
-import { CustomerSupplierInterface } from '../interface/supplier_customer';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
+import { HttpResponseWS } from '../class/htt_response_ws';
 
 
 const httpOptions = {
@@ -19,6 +19,8 @@ export class SupplierService {
     fotuna_ws_url = "http://localhost:8080/";
     create_customer_supplier_path = this.fotuna_ws_url + "createcustsup";
     get_customer_supplier_path = this.fotuna_ws_url + "getcustsupall?";
+    get_customer_supplier_byid=this.fotuna_ws_url + "getcustsup?";
+    delete_customer_supplier_byid=this.fotuna_ws_url + "deletecustsupp?";
 
     constructor(private http: HttpClient) {
     }
@@ -28,6 +30,10 @@ export class SupplierService {
         return this.http.get<CustomerSupplier[]>(this.get_customer_supplier_path+"isc="+isCustomer);
     }
 
+     /** GET: supplier based on id from database */
+     getSupplierById(id:number):Observable<CustomerSupplier>{
+        return this.http.get<CustomerSupplier>(this.get_customer_supplier_byid+"id="+id);
+     }
 
     /** POST: add a new supplier to the database */
     addSupplier(suppCust: CustomerSupplier): Observable<CustomerSupplier> {
@@ -35,6 +41,10 @@ export class SupplierService {
             // .pipe(
             //     catchError(this.handleError('addHero', suppCust))
             // );
+    }
+    /** DELETE: delete supplier from database */
+    deleteSupplierById(id:number):Observable<HttpResponseWS>{
+        return this.http.delete<HttpResponseWS>(this.delete_customer_supplier_byid+"id="+id);
     }
 
 

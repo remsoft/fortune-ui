@@ -2,17 +2,12 @@ import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 
 import { PagesComponent } from './pages.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
 import { AccountingComponent } from './accounting/accounting.component';
 
 const routes: Routes = [{
   path: '',
   component: PagesComponent,
   children: [
-    {
-      path: 'dashboard',
-      component: DashboardComponent,
-    },
     {
       path: 'accounting',
       loadChildren:'./accounting/accounting.module#AccountingModule'
@@ -23,7 +18,7 @@ const routes: Routes = [{
     },
     {
       path: '',
-      redirectTo: 'dashboard',
+      redirectTo: 'maintenance',
       pathMatch: 'full',
     },
   ],

@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-
 import { LocalDataSource } from 'ng2-smart-table';
-
+import { NgbModal, ModalDismissReasons, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { SmartTableService } from '../../../@core/data/smart-table.service';
 import { SupplierService } from '../../../service/supplier';
-import { CustomerSupplierInterface } from '../../../interface/supplier_customer';
 import { Observable } from 'rxjs/Observable';
 import { Router } from '@angular/router';
+import { CustomerSupplier } from '../../../class/supplier_customer';
+import { Address } from '../../../class/address';
+import { ModalComponent } from '../../shares/modals/modal/modal.component';
+import { HttpResponseWS } from '../../../class/htt_response_ws';
 
 @Component({
   selector: 'list',
@@ -14,9 +16,15 @@ import { Router } from '@angular/router';
   styleUrls: ['./supplier_list.component.scss']
 })
 export class SupplierListComponent implements OnInit {
-  listObservable: Observable<CustomerSupplierInterface[]>;
-  listCustomerSupplierInterface: CustomerSupplierInterface[];
+  listObservable: Observable<CustomerSupplier[]>;
+  listCustomerSupplierInterface: CustomerSupplier[];
+  closeResult: string;
+  model = new CustomerSupplier();
+  supplierObservable: Observable<CustomerSupplier>;
+  httpRespObservable:Observable<HttpResponseWS>;
+
   ngOnInit() {
+    this.model.address = new Address();
   }
 
   settings = {
@@ -56,7 +64,11 @@ export class SupplierListComponent implements OnInit {
 
   source: LocalDataSource = new LocalDataSource();
 
-  constructor(private router:Router,private service: SupplierService) {
+  constructor(private router: Router, private service: SupplierService, private modalService: NgbModal, private supplierService: SupplierService) {
+    this.loadListSupplier();
+  }
+
+  loadListSupplier() {
     this.listObservable = this.service.getSupplierAll('0');
     this.listObservable.subscribe((listObservable) => {
       this.listCustomerSupplierInterface = listObservable;
@@ -64,8 +76,8 @@ export class SupplierListComponent implements OnInit {
       this.source.load(data);
       //  this.blockUI.stop();
     })
-
   }
+
 
   onDeleteConfirm(event): void {
     if (window.confirm('Are you sure you want to delete?')) {
@@ -74,9 +86,58 @@ export class SupplierListComponent implements OnInit {
       event.confirm.reject();
     }
   }
-  onAdd(event): void {
-    console.log("Enter Add");
-    this.router.navigate(["pages/maintenance/supplier_form"]);    
+
+  onSubmit() {
+    this.supplierObservable = this.supplierService.addSupplier(this.model);
+    this.supplierObservable.subscribe((supplierObservable) => {
+      this.model = supplierObservable;
+    });
+    this.loadListSupplier();
   }
 
+  openModal(modal) {
+    this.model = new CustomerSupplier();
+    this.model.address = new Address();
+    this.modalService.open(modal).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+
+  openEditModal(modal, model) {
+    // this.supplierObservable = this.service.getSupplierById(id);
+    // this.supplierObservable.subscribe((supplierObservable) => {
+    //   this.model = supplierObservable;
+    // });
+
+    this.openModal(modal);
+    this.model = model;
+  }
+
+  deleteById(model: CustomerSupplier){
+    this.httpRespObservable = this.supplierService.deleteSupplierById(model.id);
+    this.httpRespObservable.subscribe((httpRespObservable) => {
+      console.log("Deleted");
+    });
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
+  }
+
+  showLargeModal() {
+    const activeModal = this.modalService.open(ModalComponent, { size: 'lg', container: 'nb-layout' });
+
+    activeModal.componentInstance.modalHeader = 'Large Modal';
+  }
+
+  // TODO: Remove this when we're done
+  get diagnostic() { return JSON.stringify(this.model); }
 }

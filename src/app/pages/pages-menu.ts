@@ -2,12 +2,6 @@ import { NbMenuItem } from '@nebular/theme';
 
 export const MENU_ITEMS: NbMenuItem[] = [
   {
-    title: 'Dashboard',
-    icon: 'nb-home',
-    link: '/pages/dashboard',
-    home: true,
-  },
-  {
     title: 'Accounting',
     icon: 'ion-clipboard',
     children: [
@@ -28,10 +22,11 @@ export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'Maintenance',
     icon: 'ion-clipboard',
+    home: true,
     children:[{
       title:'Supplier',
       link:'/pages/maintenance/supplier_list',
-    }
+    },
   ]
   },
   {

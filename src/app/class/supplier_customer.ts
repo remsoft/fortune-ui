@@ -1,7 +1,6 @@
-import { CustomerSupplierInterface } from "../interface/supplier_customer";
 import { Address } from "./address";
 
-export class CustomerSupplier implements CustomerSupplierInterface {
+export class CustomerSupplier{ 
     id: number;
     name: string;
     phone: string;
