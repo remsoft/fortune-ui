@@ -16,11 +16,11 @@ const httpOptions = {
 
 @Injectable()
 export class SupplierService {
-    fotuna_ws_url = "http://localhost:8080/";
-    create_customer_supplier_path = this.fotuna_ws_url + "createcustsup";
-    get_customer_supplier_path = this.fotuna_ws_url + "getcustsupall?";
-    get_customer_supplier_byid=this.fotuna_ws_url + "getcustsup?";
-    delete_customer_supplier_byid=this.fotuna_ws_url + "deletecustsupp?";
+    fotuna_ws_url = "http://localhost:8080";
+    create_customer_supplier_path = this.fotuna_ws_url + "/custsupp/create";
+    get_customer_supplier_path = this.fotuna_ws_url + "/custsupp/getall?";
+    get_customer_supplier_byid=this.fotuna_ws_url + "/custsupp/get?";
+    delete_customer_supplier_byid=this.fotuna_ws_url + "/custsupp/delete?";
 
     constructor(private http: HttpClient) {
     }
