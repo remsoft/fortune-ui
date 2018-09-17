@@ -26,6 +26,9 @@ export const MENU_ITEMS: NbMenuItem[] = [
     children:[{
       title:'Supplier',
       link:'/pages/maintenance/supplier_list',
+    },{
+      title:'COA',
+      link:'/pages/maintenance/coa',
     },
   ]
   },

@@ -18,6 +18,7 @@ const httpOptions = {
 export class SupplierService {
     fotuna_ws_url = "http://localhost:8080";
     create_customer_supplier_path = this.fotuna_ws_url + "/custsupp/create";
+    update_customer_supplier_path = this.fotuna_ws_url +"/custsupp/update";
     get_customer_supplier_path = this.fotuna_ws_url + "/custsupp/getall?";
     get_customer_supplier_byid=this.fotuna_ws_url + "/custsupp/get?";
     delete_customer_supplier_byid=this.fotuna_ws_url + "/custsupp/delete?";
@@ -25,6 +26,9 @@ export class SupplierService {
     constructor(private http: HttpClient) {
     }
     
+
+
+
      /** GET: fetch list of supplier from database */
     getSupplierAll(isCustomer:string):Observable<CustomerSupplier[]>{
         return this.http.get<CustomerSupplier[]>(this.get_customer_supplier_path+"isc="+isCustomer);
@@ -35,6 +39,11 @@ export class SupplierService {
         return this.http.get<CustomerSupplier>(this.get_customer_supplier_byid+"id="+id);
      }
 
+     /** PUT:  modify supplier from database*/
+     updateSupplier(suppCust:CustomerSupplier):Observable<HttpResponseWS>{
+        return this.http.put<HttpResponseWS>(this.update_customer_supplier_path,suppCust);
+     }
+
     /** POST: add a new supplier to the database */
     addSupplier(suppCust: CustomerSupplier): Observable<CustomerSupplier> {
         return this.http.post<CustomerSupplier>(this.create_customer_supplier_path, suppCust);
@@ -42,6 +51,7 @@ export class SupplierService {
             //     catchError(this.handleError('addHero', suppCust))
             // );
     }
+
     /** DELETE: delete supplier from database */
     deleteSupplierById(id:number):Observable<HttpResponseWS>{
         return this.http.delete<HttpResponseWS>(this.delete_customer_supplier_byid+"id="+id);
