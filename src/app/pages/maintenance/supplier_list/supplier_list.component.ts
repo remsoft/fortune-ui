@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { LocalDataSource } from 'ng2-smart-table';
 import { NgbModal, ModalDismissReasons, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { SmartTableService } from '../../../@core/data/smart-table.service';
-import { SupplierService } from '../../../service/supplier';
+import { SupplierService } from '../../../service/supplier.service';
 import { Observable } from 'rxjs/Observable';
 import { Router } from '@angular/router';
 import { CustomerSupplier } from '../../../class/supplier_customer';
@@ -88,10 +88,11 @@ export class SupplierListComponent implements OnInit {
   }
 
   onSubmit() {
-    this.supplierObservable = this.supplierService.addSupplier(this.model);
-    this.supplierObservable.subscribe((supplierObservable) => {
-      this.model = supplierObservable;
-    });
+    if(this.model.id==null){
+      this.onCreate();
+    }else{
+      this.onUpdate();
+    }
     this.loadListSupplier();
   }
 
@@ -105,20 +106,30 @@ export class SupplierListComponent implements OnInit {
     });
   }
 
-  openEditModal(modal, model) {
-    // this.supplierObservable = this.service.getSupplierById(id);
-    // this.supplierObservable.subscribe((supplierObservable) => {
-    //   this.model = supplierObservable;
-    // });
-
+  onEdit(modal, model) {
     this.openModal(modal);
     this.model = model;
   }
 
-  deleteById(model: CustomerSupplier){
+  onCreate(){
+    this.supplierObservable = this.supplierService.addSupplier(this.model);
+    this.supplierObservable.subscribe((supplierObservable) => {
+      this.model = supplierObservable;
+    });
+
+  }
+
+  onUpdate(){
+   this.httpRespObservable = this.supplierService.updateSupplier(this.model);
+   this.httpRespObservable.subscribe((httpRespObservable) => {
+    console.log(httpRespObservable.status);
+   }); 
+  }
+  
+  onDeleteById(model: CustomerSupplier){
     this.httpRespObservable = this.supplierService.deleteSupplierById(model.id);
     this.httpRespObservable.subscribe((httpRespObservable) => {
-      console.log("Deleted");
+      console.log(httpRespObservable.status);
     });
   }
 
