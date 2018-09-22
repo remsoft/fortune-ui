@@ -5,6 +5,7 @@ import { CustomerSupplier } from '../class/supplier_customer';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { HttpResponseWS } from '../class/htt_response_ws';
+import { AppSettings } from '../class/app_settings';
 
 
 const httpOptions = {
@@ -16,37 +17,28 @@ const httpOptions = {
 
 @Injectable()
 export class SupplierService {
-    fotuna_ws_url = "http://localhost:8080";
-    create_customer_supplier_path = this.fotuna_ws_url + "/custsupp/create";
-    update_customer_supplier_path = this.fotuna_ws_url +"/custsupp/update";
-    get_customer_supplier_path = this.fotuna_ws_url + "/custsupp/getall?";
-    get_customer_supplier_byid=this.fotuna_ws_url + "/custsupp/get?";
-    delete_customer_supplier_byid=this.fotuna_ws_url + "/custsupp/delete?";
 
     constructor(private http: HttpClient) {
     }
     
-
-
-
      /** GET: fetch list of supplier from database */
     getSupplierAll(isCustomer:string):Observable<CustomerSupplier[]>{
-        return this.http.get<CustomerSupplier[]>(this.get_customer_supplier_path+"isc="+isCustomer);
+        return this.http.get<CustomerSupplier[]>(AppSettings.get_customer_supplier_path+"isc="+isCustomer);
     }
 
      /** GET: supplier based on id from database */
      getSupplierById(id:number):Observable<CustomerSupplier>{
-        return this.http.get<CustomerSupplier>(this.get_customer_supplier_byid+"id="+id);
+        return this.http.get<CustomerSupplier>(AppSettings.get_customer_supplier_byid+"id="+id);
      }
 
      /** PUT:  modify supplier from database*/
      updateSupplier(suppCust:CustomerSupplier):Observable<HttpResponseWS>{
-        return this.http.put<HttpResponseWS>(this.update_customer_supplier_path,suppCust);
+        return this.http.put<HttpResponseWS>(AppSettings.update_customer_supplier_path,suppCust);
      }
 
     /** POST: add a new supplier to the database */
     addSupplier(suppCust: CustomerSupplier): Observable<CustomerSupplier> {
-        return this.http.post<CustomerSupplier>(this.create_customer_supplier_path, suppCust);
+        return this.http.post<CustomerSupplier>(AppSettings.create_customer_supplier_path, suppCust);
             // .pipe(
             //     catchError(this.handleError('addHero', suppCust))
             // );
@@ -54,7 +46,7 @@ export class SupplierService {
 
     /** DELETE: delete supplier from database */
     deleteSupplierById(id:number):Observable<HttpResponseWS>{
-        return this.http.delete<HttpResponseWS>(this.delete_customer_supplier_byid+"id="+id);
+        return this.http.delete<HttpResponseWS>(AppSettings.delete_customer_supplier_byid+"id="+id);
     }
 
 

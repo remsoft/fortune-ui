@@ -3,5 +3,129 @@
     Chart of Account
   </nb-card-header>
   <nb-card-body>
+    <div class="form-group row">
+      <div style="padding: 15px">
+        <button type="button" class="btn btn-success">
+          <i class="nb-home"></i>
+          <span>Add Account</span>
+        </button>
+      </div>
+      <div style="padding: 15px">
+        <button type="button" class="btn btn-success">
+          <i class="nb-home"></i>
+          <span>Add Bank Account</span>
+        </button>
+      </div>
+      <div style="padding: 15px">
+        <button type="button" class="btn btn-success">
+          <i class="nb-home"></i>
+          <span> Print PDF</span>
+        </button>
+      </div>
+      <div style="padding: 15px">
+        <button type="button" class="btn btn-success">
+          <i class="nb-home"></i>
+          <span> Import </span>
+        </button>
+      </div>
+      <div style="padding: 15px">
+        <button type="button" class="btn btn-success">
+          <i class="nb-home"></i>
+          <span> Export </span>
+        </button>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-md-8">
+        <div [(ngModel)]="radioModel" ngbRadioGroup class="btn-group btn-group-toggle btn-outline-toggle-group btn-group-full-width btn-toggle-radio-group">
+          <label ngbButtonLabel class="btn btn-outline-success">
+            <input ngbButton type="radio" value="all" (click)="onSelectTab('all')"> All Accounts
+          </label>
+          <label ngbButtonLabel class="btn btn-outline-success">
+            <input ngbButton type="radio" value="asset" (click)="onSelectTab('asset')"> Assets
+          </label>
+          <label ngbButtonLabel class="btn btn-outline-success">
+            <input ngbButton type="radio" value="liability" (click)="onSelectTab('liability')"> Liabilities
+          </label>
+          <label ngbButtonLabel class="btn btn-outline-success">
+            <input ngbButton type="radio" value="equity" (click)="onSelectTab('equity')"> Equity
+          </label>
+          <label ngbButtonLabel class="btn btn-outline-success">
+            <input ngbButton type="radio" value="expense" (click)="onSelectTab('expense')"> Expenses
+          </label>
+          <label ngbButtonLabel class="btn btn-outline-success">
+            <input ngbButton type="radio" value="revenue" (click)="onSelectTab('revenue')"> Revenue
+          </label>
+          <label ngbButtonLabel class="btn btn-outline-success">
+            <input ngbButton type="radio" value="archive" (click)="onSelectTab('archive')"> Archive
+          </label>
+        </div>
+      </div>
+    </div>
+    <table class="fdt-table">
+      <thead>
+        <tr>
+          <th style="width: 160px;">
+            <a class="ng2-smart-sort-link sort" href="#"> Action </a>
+          </th>
+          <th>
+              <a class="ng2-smart-sort-link sort" href="#"> Account Type</a>
+            </th>
+          <th>
+            <a class="ng2-smart-sort-link sort" href="#"> Code</a>
+          </th>
+          <th>
+              <a class="ng2-smart-sort-link sort" href="#">Name</a>
+            </th>
+          <th>
+            <a class="ng2-smart-sort-link sort" href="#"> Description</a>
+          </th>
+          <th>
+            <a class="ng2-smart-sort-link sort" href="#"> Tax Type</a>
+          </th>
+        </tr>
+        <tr>
+          <th>
+            <a class="ng2-smart-action-add" (click)="openModal(modal)">
+              <i class="nb-plus"></i>
+            </a>
+          </th>
+          <th>
+            <input type="text" class="form-control" name="name" placeholder="Account Type" />
+          </th>
+          <th>
+            <input type="text" class="form-control" name="phone" placeholder="Code" />
+          </th>
+          <th>
+              <input type="text" class="form-control" name="phone" placeholder="Name" />
+            </th>
+          <th>
+            <input type="text" class="form-control" name="email" placeholder="Description" />
+          </th>
+          <th>
+            <input type="text" class="form-control" name="address" placeholder="Tax Type" />
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor="let coa of listCoa; let i = index">
+              <td class="ng2-smart-action-edit">
+                 <a class="ng2-smart-action ng2-smart-action-edit-edit" (click)="onEdit(modal,coa)"><i class="nb-edit"></i></a>
+                 <a class="ng2-smart-action ng2-smart-action-delete-delete" (click)="onDelete(coa)"><i class="nb-trash"></i></a>
+             </td>  
+              <td>{{coa.l1AccountType}}</td>
+              <td>{{coa.coaCd}}</td>
+              <td>{{coa.description}}</td>
+              <td>{{coa.description}}</td>
+              <td>{{coa.favorite}}</td>
+          </tr>    
+      </tbody>
+    </table>
   </nb-card-body>
 </nb-card>
+<ng-template #modal let-c="close" let-d="dismiss">
+  <div class="row">
+    <div class="col-md-12">
+    </div>
+  </div>
+</ng-template>

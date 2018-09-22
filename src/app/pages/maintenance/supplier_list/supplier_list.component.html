@@ -24,10 +24,10 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let supp of listCustomerSupplierInterface; let i = index">
+        <tr *ngFor="let supp of listCustomerSupplier; let i = index">
          <td class="ng2-smart-action-edit">
             <a class="ng2-smart-action ng2-smart-action-edit-edit" (click)="onEdit(modal,supp)"><i class="nb-edit"></i></a>
-            <a class="ng2-smart-action ng2-smart-action-delete-delete" (click)="onDeleteById(supp)"><i class="nb-trash"></i></a>
+            <a class="ng2-smart-action ng2-smart-action-delete-delete" (click)="onDelete(supp)"><i class="nb-trash"></i></a>
         </td>  
          <td>{{supp.name}}</td>
          <td>{{supp.phone}}</td>

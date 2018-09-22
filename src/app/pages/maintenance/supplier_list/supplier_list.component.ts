@@ -17,7 +17,7 @@ import { HttpResponseWS } from '../../../class/htt_response_ws';
 })
 export class SupplierListComponent implements OnInit {
   listObservable: Observable<CustomerSupplier[]>;
-  listCustomerSupplierInterface: CustomerSupplier[];
+  listCustomerSupplier: CustomerSupplier[];
   closeResult: string;
   model = new CustomerSupplier();
   supplierObservable: Observable<CustomerSupplier>;
@@ -27,43 +27,6 @@ export class SupplierListComponent implements OnInit {
     this.model.address = new Address();
   }
 
-  settings = {
-    add: {
-      addButtonContent: '<i class="nb-plus"></i>',
-      createButtonContent: '<i class="nb-checkmark"></i>',
-      cancelButtonContent: '<i class="nb-close"></i>',
-    },
-    edit: {
-      editButtonContent: '<i class="nb-edit"></i>',
-      saveButtonContent: '<i class="nb-checkmark"></i>',
-      cancelButtonContent: '<i class="nb-close"></i>',
-    },
-    delete: {
-      deleteButtonContent: '<i class="nb-trash"></i>',
-      confirmDelete: true,
-    },
-    columns: {
-      name: {
-        title: 'Name',
-        type: 'string',
-      },
-      phone: {
-        title: 'Phone',
-        type: 'string',
-      },
-      email: {
-        title: 'E-mail',
-        type: 'string',
-      },
-      city: {
-        title: 'City',
-        type: 'string',
-      },
-    },
-  };
-
-  source: LocalDataSource = new LocalDataSource();
-
   constructor(private router: Router, private service: SupplierService, private modalService: NgbModal, private supplierService: SupplierService) {
     this.loadListSupplier();
   }
@@ -71,10 +34,7 @@ export class SupplierListComponent implements OnInit {
   loadListSupplier() {
     this.listObservable = this.service.getSupplierAll('0');
     this.listObservable.subscribe((listObservable) => {
-      this.listCustomerSupplierInterface = listObservable;
-      const data = this.listCustomerSupplierInterface;
-      this.source.load(data);
-      //  this.blockUI.stop();
+      this.listCustomerSupplier = listObservable;
     })
   }
 
@@ -126,7 +86,7 @@ export class SupplierListComponent implements OnInit {
    }); 
   }
   
-  onDeleteById(model: CustomerSupplier){
+  onDelete(model: CustomerSupplier){
     this.httpRespObservable = this.supplierService.deleteSupplierById(model.id);
     this.httpRespObservable.subscribe((httpRespObservable) => {
       console.log(httpRespObservable.status);
