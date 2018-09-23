@@ -19,5 +19,5 @@ export class CoaService {
   getCoaAll():Observable<Coa[]>{
       return this.http.get<Coa[]>(AppSettings.get_coa_path);
   }
-
+ 
 }
