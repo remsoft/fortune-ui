@@ -6,7 +6,7 @@ export class AppSettings{
     public static get_customer_supplier_byid =AppSettings.getFortunaWSURL() + "/custsupp/get?";
     public static delete_customer_supplier_byid =AppSettings.getFortunaWSURL() + "/custsupp/delete?";
 
-    public static get_coa_path = AppSettings.getFortunaWSURL() + "/coa/getall";
+    public static get_coa_path = AppSettings.getFortunaWSURL() + "/coa/getall?";
 
     private static getFortunaWSURL() {
         return this.fotuna_ws_url;

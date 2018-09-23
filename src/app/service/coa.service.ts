@@ -16,8 +16,8 @@ export class CoaService {
   constructor(private http: HttpClient) {
   }
    /** GET: fetch list of supplier from database */
-  getCoaAll():Observable<Coa[]>{
-      return this.http.get<Coa[]>(AppSettings.get_coa_path);
+  getCoaAll(accType:string):Observable<Coa[]>{
+      return this.http.get<Coa[]>(AppSettings.get_coa_path+"accType="+accType);
   }
  
 }
