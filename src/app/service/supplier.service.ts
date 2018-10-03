@@ -37,8 +37,8 @@ export class SupplierService {
      }
 
     /** POST: add a new supplier to the database */
-    addSupplier(suppCust: CustomerSupplier): Observable<CustomerSupplier> {
-        return this.http.post<CustomerSupplier>(AppSettings.create_customer_supplier_path, suppCust);
+    addSupplier(suppCust: CustomerSupplier): Observable<HttpResponseWS> {
+        return this.http.post<HttpResponseWS>(AppSettings.create_customer_supplier_path, suppCust);
             // .pipe(
             //     catchError(this.handleError('addHero', suppCust))
             // );

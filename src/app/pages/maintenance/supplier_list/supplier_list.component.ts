@@ -20,7 +20,6 @@ export class SupplierListComponent implements OnInit {
   listCustomerSupplier: CustomerSupplier[];
   closeResult: string;
   model = new CustomerSupplier();
-  supplierObservable: Observable<CustomerSupplier>;
   httpRespObservable:Observable<HttpResponseWS>;
 
   ngOnInit() {
@@ -72,9 +71,9 @@ export class SupplierListComponent implements OnInit {
   }
 
   onCreate(){
-    this.supplierObservable = this.supplierService.addSupplier(this.model);
-    this.supplierObservable.subscribe((supplierObservable) => {
-      this.model = supplierObservable;
+    this.httpRespObservable = this.supplierService.addSupplier(this.model);
+    this.httpRespObservable.subscribe((httpRespObservable) => {
+      console.log(httpRespObservable.status);
     });
 
   }

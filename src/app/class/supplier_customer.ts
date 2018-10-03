@@ -1,8 +1,7 @@
 import { Address } from "./address";
+import { Model } from "./model";
 
-export class CustomerSupplier{ 
-    id: number;
-    name: string;
+export class CustomerSupplier extends Model{ 
     phone: string;
     email: string;
     isCustomer:number;

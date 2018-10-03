@@ -9,10 +9,11 @@ import { ModalComponent } from '../shares/modals/modal/modal.component';
 import { SharesModule } from '../shares/shares.module';
 import { CoaComponent } from './coa/coa.component';
 import { CoaService } from '../../service/coa.service';
+import { TaxComponent } from './tax/tax.component';
 
 @NgModule({
     imports:[MaintenanceRoutingModule,ThemeModule,Ng2SmartTableModule,SharesModule], 
-    declarations:[...routedComponents],
+    declarations:[...routedComponents, TaxComponent],
     providers: [SupplierService,CoaService,SmartTableService],
     entryComponents: [
         ModalComponent,
