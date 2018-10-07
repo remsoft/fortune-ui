@@ -4,15 +4,6 @@ import { PagesComponent } from './pages.component';
 import { PagesRoutingModule } from './pages-routing.module';
 import { ThemeModule } from '../@theme/theme.module';
 import { MiscellaneousModule } from './miscellaneous/miscellaneous.module';
-import { BillsComponent } from './purchases/bills/bills.component';
-import { ReceiptsComponent } from './purchases/receipts/receipts.component';
-import { VendorsComponent } from './purchases/vendors/vendors.component';
-import { ProdserviceComponent } from './purchases/prodservice/prodservice.component';
-import { EstimatesComponent } from './sales/estimates/estimates.component';
-import { InvoicesComponent } from './sales/invoices/invoices.component';
-import { RecurringInvoiceComponent } from './sales/recurring-invoice/recurring-invoice.component';
-import { CuststatementsComponent } from './sales/custstatements/custstatements.component';
-import { CustomersComponent } from './sales/customers/customers.component';
 
 const PAGES_COMPONENTS = [
   PagesComponent,
@@ -25,17 +16,7 @@ const PAGES_COMPONENTS = [
     MiscellaneousModule,
   ],
   declarations: [
-    ...PAGES_COMPONENTS,
-    BillsComponent,
-    ReceiptsComponent,
-    VendorsComponent,
-    ProdserviceComponent,
-    EstimatesComponent,
-    InvoicesComponent,
-    RecurringInvoiceComponent,
-    CuststatementsComponent,
-    CustomersComponent
-  ],
+    ...PAGES_COMPONENTS,  ],
 })
 export class PagesModule {
 }

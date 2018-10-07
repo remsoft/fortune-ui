@@ -2,20 +2,20 @@ import { NbMenuItem } from '@nebular/theme';
 
 export const MENU_ITEMS: NbMenuItem[] = [
   {
-    title: 'Accounting',
+    title: 'Accounts',
     icon: 'ion-clipboard',
     children: [
       {
-        title: 'Transaction',
-        link: '/pages/accounting/transaction',
+        title: 'Sales',
+        link: '/pages/accounts/sales',
       }, 
       {
-        title: 'Reconcilitation',
-        link: '/pages/accounting/reconciliation',
+        title: 'Purchases',
+        link: '/pages/accounts/purchases',
       }, 
       {
-        title: 'Chart of Account',
-        link: '/pages/accounting/chart',
+        title: 'Inventory',
+        link: '/pages/accounts/chart',
       },
     ] 
   },
@@ -32,10 +32,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
     },
   ]
   },
-  {
-    title: 'FEATURES',
-    group: true,
-  },
+
   {
     title: 'Auth',
     icon: 'nb-locked',
